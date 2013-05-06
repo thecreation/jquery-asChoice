@@ -123,10 +123,11 @@
                     return false;
                 }
 
+                var self = this;
                 $.each(this.$options,function(i,v) {
                     if ($(v).attr('value') === value) {
                         $(v).prop('selected',true);
-                        this.value[0] = value;
+                        self.value[0] = value;
                     } else {
                         $(v).prop('selected',false);
                     }
@@ -134,12 +135,14 @@
 
                 $.each(this.$wrap.find('li'),function(i,v) {
                     if ($(v).data('value') === value) {
-                        $(v).addClass(this.namespace + '-selected');
+                        $(v).addClass(self.namespace + '-selected');
 
                     } else {
-                        $(v).removeClass(this.namespace + '-selected');
+                        $(v).removeClass(self.namespace + '-selected');
                     }
                 });
+
+                console.log(this.value)
 
             }
         }
