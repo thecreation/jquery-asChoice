@@ -13,20 +13,20 @@
         this.$select = $(select);
 
         this.$options = this.$select.find('option');
-        var meta = {
-            status: {},
-            value: [],
-            multiple: this.$select.prop('multiple')
-        };
+        var meta = {};
         
         if (this.$options.length != 0) {
+            meta.status = {};
+            meta.value = [];
+            meta.multiple = this.$select.prop('multiple');
+
             $.each(this.$options,function(i,v) {
                 meta.status[$(v).attr('value')] = $(v).text();
                 if ($(v).prop('selected')) {
                     meta.value.push($(v).attr('value'));
                 }
             });
-        }
+        }      
 
         this.options = $.extend({},Choice.defaults,options,meta);
         this.namespace = this.options.namespace;
@@ -48,7 +48,6 @@
             this.$wrap = $('<ul></ul>').addClass(this.namespace + '-wrap');
             this.$wrap.addClass(this.namespace).addClass(this.namespace + '-' + this.options.skin);
 
-            console.log(this.status)
             $.each(this.status,function(key,value) {
                 var $tpl = $(tpl).data('value',value).find('a').text(value).end();
 
@@ -104,7 +103,7 @@
                 if (status === 'selected') {
                     this.value.push(value);
                     $li.addClass(this.namespace + '-selected');
-                    $option.prop('selected',true);
+                    $option.prop('selected',true);                    
                     
                 } else {
                     this.value.splice(pos,1);
@@ -112,7 +111,10 @@
                     $option.prop('selected',false);
                 }
 
-                console.log(this.value)
+                this.$select.trigger('change',value);
+                if (typeof this.options.onChange === 'function') {
+                    this.options.onChange(this);
+                }
 
             } else {
                 if (value === this.value[0]) {
@@ -126,8 +128,8 @@
                 var self = this;
                 $.each(this.$options,function(i,v) {
                     if ($(v).attr('value') === value) {
-                        $(v).prop('selected',true);
-                        self.value[0] = value;
+                        $(v).prop('selected',true);  
+
                     } else {
                         $(v).prop('selected',false);
                     }
@@ -136,16 +138,23 @@
                 $.each(this.$wrap.find('li'),function(i,v) {
                     if ($(v).data('value') === value) {
                         $(v).addClass(self.namespace + '-selected');
+                        self.value[0] = value;
 
                     } else {
                         $(v).removeClass(self.namespace + '-selected');
                     }
                 });
 
-                console.log(this.value)
+                
+                this.$select.trigger('change',value);
+                if (typeof this.options.onChange === 'function') {
+                    this.options.onChange(this);
+                }
 
             }
-        }
+        },
+        enable: function() {},
+        disable: function() {}
     };
 
     Choice.defaults = {
@@ -159,9 +168,12 @@
         multiple: false,
         value: ['default'],
 
-        namespace: 'choice'
+        namespace: 'choice',
+        onChange: function(instance) {
+            console.log(instance.value);
+        }
+    };
 
-    }
     $.fn.choice = function(options) {
         return this.each(function() {
             if (!$.data(this, 'choice')) {
