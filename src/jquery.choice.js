@@ -41,15 +41,16 @@
         constuctor: Choice,
         init: function() {
             var self = this,
+                i = 0,
                 tpl = '<li><a href="#"></a></li>';
 
             this.$select.css({display:'none'});
 
-            this.$wrap = $('<ul></ul>').addClass(this.namespace + '-wrap');
-            this.$wrap.addClass(this.namespace).addClass(this.namespace + '-' + this.options.skin);
+            this.$wrap = $('<ul></ul>');
+            this.$wrap.addClass(this.namespace).addClass(this.options.skin);
 
             $.each(this.status,function(key,value) {
-                var $tpl = $(tpl).data('value',value).find('a').text(value).end();
+                var $tpl = $(tpl).addClass('opt-' + (i + 1)).data('value',value).find('a').text(value).end();
 
                 $.each(self.value,function(i,v) {
                     if (v === value) {
@@ -58,9 +59,16 @@
                 });
 
                 self.$wrap.append($tpl);
+
+                i++;
             });
 
             this.$select.after(this.$wrap);
+
+            // cancel a link
+            this.$wrap.find('a').on('click', function(e) {
+                e.preventDefault();
+            });
 
             if (this.options.multiple === true) {
                 this.$wrap.delegate('li','click',function(){
@@ -158,7 +166,7 @@
     };
 
     Choice.defaults = {
-        skin: 'simple',
+        skin: 'skin-5',
 
         status: {
             a: 'on',
@@ -180,5 +188,6 @@
                 $.data(this, 'choice', new Choice(this, options));
             }
         });
-    }
+    };
+    
 }(jQuery));

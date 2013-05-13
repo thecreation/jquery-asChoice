@@ -1,27 +1,47 @@
+//reset
+//================================================
+@import "./reset.less";
 
-
-.choice-wrap {
-	width: 200px;
-	height: 80px;
-
+//core
+//================================================
+.choice {
 	list-style: none;
-	overflow: hidden;
-
-	li {
-		width: 60px;
-		height: 40px;
-
+	>li {
 		float: left;
-
-		text-align: center;
-		background-color: #888;
-
-		a {
+		&:hover {
+			cursor: pointer;
+		}
+		>a {
 			text-decoration: none;
+		
+			&:hover {
+				text-decoration: none;
+			}
+			&:active {
+				text-decoration: none;
+			}
+			&:focus {
+				outline: none;
+			}
 		}
 	}
-
-	.choice-selected {
-		background-color: red;
-	}
 }
+
+//================================================
+
+//mixins
+//================================================
+@import "./mixins.less";
+
+
+//choice-skins
+//================================================
+
+// @import "./choice-skin1.less";
+// @import "./choice-skin2.less";
+@import "./choice-skin3.less";
+// @import "./choice-skin4.less";
+@import "./choice-skin5.less";
+@import "./choice-skin6.less";
+
+//================================================

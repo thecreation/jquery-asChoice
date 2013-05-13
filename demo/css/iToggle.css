@@ -1,0 +1,22 @@
+.choice.choice-simple {
+  width: 200px;
+  height: 80px;
+  overflow: hidden;
+  list-style: none;
+}
+
+.choice.choice-simple li {
+  float: left;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  background-color: #888;
+}
+
+.choice.choice-simple li a {
+  text-decoration: none;
+}
+
+.choice.choice-simple .choice-selected {
+  background-color: red;
+}

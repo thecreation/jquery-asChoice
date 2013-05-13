@@ -1,0 +1,61 @@
+//skin-6-var
+//=======================
+
+//=======================
+
+
+.choice.skin-6 {
+	list-style: none;//--
+	>li {
+		float: left;//--
+		background-color: #7ebdcb;
+
+		&:hover {
+			cursor: pointer;//--
+		}
+
+		>a {
+			display: block;
+			padding: 8px 15px 6px;
+			
+			color: #fff;
+			font-size: 13px;
+			font-family: "ProximaNova Regular", "Myriad Pro", sans-serif;
+			text-decoration: none;
+
+			border-right: 1px solid lighten(#7ebdcb,10%);//#98cad5
+			background-color: transparent;
+
+			&:hover {
+				text-decoration: none;//--
+			}
+			&:active {
+				text-decoration: none;//--
+			}
+			&:focus {
+				outline: none;//--
+			}
+
+		}
+
+		&:first-child {
+			.border-radius(2px 0 0 2px);
+			>a {
+				border-left: 1px solid transparent;
+				.border-radius(2px 0 0 2px);
+			}
+		}
+
+		&:last-child {
+			.border-radius(0 2px 2px 0);
+			>a {
+				border-right: 1px solid transparent;
+				.border-radius(0 2px 2px 0);
+			}
+		}
+
+		&.choice-selected {
+			background-color: #6ba1ad;
+		}
+	}
+}

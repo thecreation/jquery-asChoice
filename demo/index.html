@@ -64,40 +64,126 @@
 <!--[if lt IE 7]>
     <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 <![endif]-->
+<div id="toc"></div>
+<div id="wrapper">
+    <section>
+        <h2>Choice</h2>
+        <section>
+            <h3>Built on select tag with multiple selected</h3>
+            <pre class="has-example"><code class="language-javascript">
+&lt;select class="select" multiple="multiple"&gt;
+    &lt;option value ="default" selected="selected"&gt;default&lt;/option&gt;
+    &lt;option value ="on"&gt;on&lt;/option&gt;
+    &lt;option value="off"&gt;off&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+    $('.select').choice();
+&lt;/script&gt;
+            </code></pre>
+            <div class="example">
+                <select class="select" multiple="multiple">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on">on</option>
+                    <option value="off">off</option>
+                </select>
+                <script type="text/javascript">
+                    $('.select').choice();
+                </script>
+            </div>
+        </section>
+        <section>
+            <h3>Built on select tag with single selected</h3>
+            <pre class="has-example"><code class="language-javascript">
+&lt;select class="select-radio"&gt;
+    &lt;option value ="default" selected="selected"&gt;default&lt;/option&gt;
+    &lt;option value ="on" selected="selected"&gt;on&lt;/option&gt;
+    &lt;option value="off"&gt;off&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+    $('.select-radio').choice();
+&lt;/script&gt;
+            </code></pre>
+            <div class="example">
+                <select class="select-radio">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+                <script type="text/javascript">
+                    $('.select-radio').choice();
+                </script>
+            </div>
+        </section>
+        <section>
+            <h3>Built on div tag </h3>
+            <pre class="has-example"><code class="language-javascript">
+&lt;div class="blank"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    $('.blank').choice({
+        status: {
+            a: 'on',
+            b: 'off',
+            c: 'default'
+        },
+        multiple: false
+    });
+&lt;/script&gt; 
+            </code></pre>
+            <div class="example">
+                <div class="blank"></div>
+                <script type="text/javascript">
+                    $('.blank').choice({
+                        status: {
+                            a: 'on',
+                            b: 'off',
+                            c: 'default'
+                        },
+                        multiple: false
+                    });
+                </script>
+            </div>
+        </section>
+        <section>
+            <h3>skins</h3>
+            <div class="example">
+                <div>skin-3:</div>
+                <select class="skin-3">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                    <option value="default-1">default-1</option>
+                </select>
+                <script type="text/javascript">
+                    $('.skin-3').choice({
+                        skin: 'skin-3'
+                    });
+                </script>
+            </div>
 
-<div id="wrap">
-    <div id="inner"></div>
+            <div class="example">
+                <div>skin-6:</div>
+                <select class="skin-6">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+                <script type="text/javascript">
+                    $('.skin-6').choice({
+                        skin: 'skin-6'
+                    });
+                </script>
+            </div>
 
-
-
-    <div class="select-box">
-        <select class="select" multiple="multiple">
-            <option value ="default" selected="selected">default</option>
-            <option value ="on">on</option>
-            <option value="off">off</option>
-        </select>
-    </div>
-
-    <div class="select-box -1">
-        <select class="select-radio">
-            <option value ="default" selected="selected">default</option>
-            <option value ="on" selected="selected">on</option>
-            <option value="off">off</option>
-        </select>
-    </div>
-
-    <div class="blank"></div>
-
-    
-     
+        </section>
+    </section>
 </div>
-    
+
 
 <script type="text/javascript">
     console.log($('.select').prop('multiple'));
-    $('.select').choice();
-    $('.select-radio').choice();
-    $('.blank').choice();
+    (function(){
+        $('#toc').toc();
+    })();
 </script>
 
 
