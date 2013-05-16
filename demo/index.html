@@ -134,9 +134,18 @@
                 <script type="text/javascript">
                     $('.blank').choice({
                         status: {
-                            a: 'on',
-                            b: 'off',
-                            c: 'default'
+                            a: {
+                                text: 'on',
+                                icon: ''
+                            },
+                            b: {
+                                text: 'off',
+                                icon: ''
+                            },
+                            c: {
+                                text: 'default',
+                                icon: ''
+                            }
                         },
                         multiple: false
                     });
@@ -166,10 +175,41 @@
                     <option value ="default" selected="selected">default</option>
                     <option value ="on" selected="selected">on</option>
                     <option value="off">off</option>
+                    <option value="c">value</option>
                 </select>
                 <script type="text/javascript">
                     $('.skin-6').choice({
                         skin: 'skin-6'
+                    });
+                </script>
+            </div>
+
+            <div class="example">
+                <div>skin-2:</div>
+                <select class="skin-2">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                    <option value="c">value</option>
+                </select>
+                <script type="text/javascript">
+                    $('.skin-2').choice({
+                        skin: 'skin-2'
+                    });
+                </script>
+            </div>
+
+            <div class="example">
+                <div>skin-4:</div>
+                <select class="skin-4">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                    <option value="c">value</option>
+                </select>
+                <script type="text/javascript">
+                    $('.skin-4').choice({
+                        skin: 'skin-4'
                     });
                 </script>
             </div>

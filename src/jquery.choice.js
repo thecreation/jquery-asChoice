@@ -21,14 +21,15 @@
             meta.multiple = this.$select.prop('multiple');
 
             $.each(this.$options,function(i,v) {
-                meta.status[$(v).attr('value')] = $(v).text();
+                meta.status[$(v).attr('value')] = {};
+                meta.status[$(v).attr('value')].text = $(v).text();
                 if ($(v).prop('selected')) {
                     meta.value.push($(v).attr('value'));
                 }
             });
         }      
 
-        this.options = $.extend({},Choice.defaults,options,meta);
+        this.options = $.extend(true,{},Choice.defaults,options,meta);
         this.namespace = this.options.namespace;
         this.status = this.options.status;
         
@@ -41,7 +42,6 @@
         constuctor: Choice,
         init: function() {
             var self = this,
-                i = 0,
                 tpl = '<li><a href="#"></a></li>';
 
             this.$select.css({display:'none'});
@@ -50,17 +50,25 @@
             this.$wrap.addClass(this.namespace).addClass(this.options.skin);
 
             $.each(this.status,function(key,value) {
-                var $tpl = $(tpl).addClass('opt-' + (i + 1)).data('value',value).find('a').text(value).end();
+                var $tpl = $(tpl).data('value', key);
+
+                console.log(value);
+
+                if (typeof value === 'object') {
+                    $tpl.find('a').text(value.text);
+                    $('<i></i>').addClass(value.icon).appendTo($tpl);
+                } else {
+                    $tpl.find('a').text(value);
+                }
 
                 $.each(self.value,function(i,v) {
-                    if (v === value) {
+                    if (v === key) {
                         $tpl.addClass(self.namespace + '-selected');
                     }
                 });
 
                 self.$wrap.append($tpl);
 
-                i++;
             });
 
             this.$select.after(this.$wrap);
@@ -152,7 +160,6 @@
                         $(v).removeClass(self.namespace + '-selected');
                     }
                 });
-
                 
                 this.$select.trigger('change',value);
                 if (typeof this.options.onChange === 'function') {
@@ -168,17 +175,27 @@
     Choice.defaults = {
         skin: 'skin-5',
 
-        status: {
-            a: 'on',
-            b: 'off',
-            c: 'default'
-        },
+        // status: {
+        //     a: {
+        //         text: 'on',
+        //         icon: 'icon-1'
+        //     },
+        //     b: {
+        //         text: 'off',
+        //         icon: 'icon-2'
+        //     },
+        //     c: {
+        //         text: 'default',
+        //         icon: 'icon-3'
+        //     }
+        // },
+        
         multiple: false,
         value: ['default'],
 
         namespace: 'choice',
         onChange: function(instance) {
-            console.log(instance.value);
+            
         }
     };
 
