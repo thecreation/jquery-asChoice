@@ -6,17 +6,24 @@
 
 .choice.skin-3 {
 	list-style: none;//--
+	width: 168px;
+	height: 41px;
 	>li {
+		position: relative;
 		float: left;//--
+		width: 25%;
+		height: 100%;
 		background-color: #323232;
 
 		&:hover {
 			cursor: pointer;//--
 		}
 
-		>a {
+		>span {
 			display: block;
-			padding: 18px 19px;
+			width: 100%;
+			height: 100%;
+			// padding: 18px 19px;
 			
 			color: transparent;
 			font-size: 0;
@@ -43,7 +50,7 @@
 		}
 
 		&:last-child {
-			>a {
+			>span {
 				border-right: 1px solid transparent;
 			}
 		}
@@ -53,27 +60,31 @@
 		}
 	}
 
- 	.opt1 {
-		>a {
-			background-image: url("../images/icons1.png");
-		}
+	[class^="icon-"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
 	}
 
-	.opt2 {
-		>a {
-			background-image: url("../images/icons2.png");
-		}
+ 	.icon-1 {
+		background-image: url("../images/icons1.png");
 	}
 
-	.opt3 {
-		>a {
-			background-image: url("../images/icons3.png");
-		}
+	.icon-2 {
+		background-image: url("../images/icons2.png");
 	}
 
-	.opt4 {
-		>a {
-			background-image: url("../images/icons4.png");
-		}
+	.icon-3 {
+		background-image: url("../images/icons3.png");
+	}
+
+	.icon-4 {
+		background-image: url("../images/icons4.png");
 	}
 }

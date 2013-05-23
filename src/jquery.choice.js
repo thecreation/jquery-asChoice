@@ -7,32 +7,34 @@
  */
 
 (function($) {
-    var Choice = $.choice = function(select,options) {
+    "use strict";
+
+    var Choice = $.choice = function(select, options) {
 
         this.select = select;
         this.$select = $(select);
 
         this.$options = this.$select.find('option');
         var meta = {};
-        
-        if (this.$options.length != 0) {
+
+        if (this.$options.length !== 0) {
             meta.status = {};
             meta.value = [];
             meta.multiple = this.$select.prop('multiple');
 
-            $.each(this.$options,function(i,v) {
+            $.each(this.$options, function(i, v) {
                 meta.status[$(v).attr('value')] = {};
                 meta.status[$(v).attr('value')].text = $(v).text();
                 if ($(v).prop('selected')) {
                     meta.value.push($(v).attr('value'));
                 }
             });
-        }      
+        }
 
-        this.options = $.extend(true,{},Choice.defaults,options,meta);
+        this.options = $.extend({}, Choice.defaults, options, meta);
         this.namespace = this.options.namespace;
         this.status = this.options.status;
-        
+
         this.value = [];
 
         this.init();
@@ -42,33 +44,37 @@
         constuctor: Choice,
         init: function() {
             var self = this,
-                tpl = '<li><a href="#"></a></li>';
+                tpl = '<li></li>';
 
-            this.$select.css({display:'none'});
+            this.$select.css({
+                display: 'none'
+            });
 
             this.$wrap = $('<ul></ul>');
             this.$wrap.addClass(this.namespace).addClass(this.options.skin);
 
-            $.each(this.status,function(key,value) {
+            $.each(this.status, function(key, value) {
                 var $tpl = $(tpl).data('value', key);
 
-                console.log(value);
-
                 if (typeof value === 'object') {
-                    $tpl.find('a').text(value.text);
-                    $('<i></i>').addClass(value.icon).appendTo($tpl);
+                    if (value.icon) {
+                        $('<i></i>').addClass(value.icon).appendTo($tpl);
+                    }
+                    if (value.text) {
+                        $('<span class="' + self.namespace + '-text"></span>').text(value.text).appendTo($tpl);
+                    }
+                    
                 } else {
-                    $tpl.find('a').text(value);
+                    $('<span class="' + self.namespace + '-text"></span>').text(value.text).appendTo($tpl);
                 }
 
-                $.each(self.value,function(i,v) {
+                $.each(self.value, function(i, v) {
                     if (v === key) {
                         $tpl.addClass(self.namespace + '-selected');
                     }
                 });
 
                 self.$wrap.append($tpl);
-
             });
 
             this.$select.after(this.$wrap);
@@ -79,38 +85,37 @@
             });
 
             if (this.options.multiple === true) {
-                this.$wrap.delegate('li','click',function(){
-                    if ($(this).hasClass(self.namespace + '-selected')) {                       
-                        self.set.call(self,$(this).data('value'),'cancel');
+                this.$wrap.delegate('li', 'click', function() {
+                    if ($(this).hasClass(self.namespace + '-selected')) {
+                        self.set.call(self, $(this).data('value'), 'cancel');
                         return false;
                     } else {
-                        self.set.call(self,$(this).data('value'),'selected');
+                        self.set.call(self, $(this).data('value'), 'selected');
                         return false;
                     }
-                    
+
                 });
-                $.each(this.options.value,function(i,v) {
-                    self.set.call(self,v,'selected');
+                $.each(this.options.value, function(i, v) {
+                    self.set.call(self, v, 'selected');
                 });
             } else {
-                this.$wrap.delegate('li','click',function(){
-                    self.set($(this).data('value'),'selected');  
+                this.$wrap.delegate('li', 'click', function() {
+                    self.set($(this).data('value'), 'selected');
                 });
-                this.set(this.options.value[0],'selected');
+                this.set(this.options.value[0], 'selected');
             }
-
         },
-        set: function(value,status) {
-            var $option,$li,
-                pos = $.inArray(value,this.value);
+        set: function(value, status) {
+            var $option, $li,
+                pos = $.inArray(value, this.value);
 
             if (this.options.multiple === true) {
-                $.each(this.$options,function(i,v) {
-                    if ($(v).attr('value') === value ) {
+                $.each(this.$options, function(i, v) {
+                    if ($(v).attr('value') === value) {
                         $option = $(v);
                     }
                 });
-                $.each(this.$wrap.find('li'),function(i,v) {
+                $.each(this.$wrap.find('li'), function(i, v) {
                     if ($(v).data('value') === value) {
                         $li = $(v);
                     }
@@ -119,15 +124,15 @@
                 if (status === 'selected') {
                     this.value.push(value);
                     $li.addClass(this.namespace + '-selected');
-                    $option.prop('selected',true);                    
-                    
+                    $option.prop('selected', true);
+
                 } else {
-                    this.value.splice(pos,1);
+                    this.value.splice(pos, 1);
                     $li.removeClass(this.namespace + '-selected');
-                    $option.prop('selected',false);
+                    $option.prop('selected', false);
                 }
 
-                this.$select.trigger('change',value);
+                this.$select.trigger('change', value);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange(this);
                 }
@@ -142,16 +147,16 @@
                 }
 
                 var self = this;
-                $.each(this.$options,function(i,v) {
+                $.each(this.$options, function(i, v) {
                     if ($(v).attr('value') === value) {
-                        $(v).prop('selected',true);  
+                        $(v).prop('selected', true);
 
                     } else {
-                        $(v).prop('selected',false);
+                        $(v).prop('selected', false);
                     }
                 });
 
-                $.each(this.$wrap.find('li'),function(i,v) {
+                $.each(this.$wrap.find('li'), function(i, v) {
                     if ($(v).data('value') === value) {
                         $(v).addClass(self.namespace + '-selected');
                         self.value[0] = value;
@@ -160,16 +165,19 @@
                         $(v).removeClass(self.namespace + '-selected');
                     }
                 });
-                
-                this.$select.trigger('change',value);
+
+                this.$select.trigger('change', value);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange(this);
                 }
-
             }
         },
-        enable: function() {},
-        disable: function() {}
+        enable: function() {
+            this.enable = true;
+        },
+        disable: function() {
+            this.enable = false;
+        }
     };
 
     Choice.defaults = {
@@ -189,22 +197,35 @@
         //         icon: 'icon-3'
         //     }
         // },
-        
+
         multiple: false,
         value: ['default'],
 
-        namespace: 'choice',
-        onChange: function(instance) {
-            
-        }
+        namespace: 'choice'
+        // onChange: function(instance) {
+
+        // }
     };
 
     $.fn.choice = function(options) {
-        return this.each(function() {
-            if (!$.data(this, 'choice')) {
-                $.data(this, 'choice', new Choice(this, options));
-            }
-        });
+        if (typeof options === 'string') {
+            var method = options;
+            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : undefined;
+
+            return this.each(function() {
+                var api = $.data(this, 'choice');
+                if (typeof api[method] === 'function') {
+                    api[method].apply(api, method_arguments);
+                }
+            });
+        } else {
+
+            return this.each(function() {
+                if (!$.data(this, 'choice')) {
+                    $.data(this, 'choice', new Choice(this, options));
+                }
+            });
+        }
     };
-    
+
 }(jQuery));

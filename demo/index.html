@@ -136,15 +136,15 @@
                         status: {
                             a: {
                                 text: 'on',
-                                icon: ''
+                                
                             },
                             b: {
                                 text: 'off',
-                                icon: ''
+                                
                             },
                             c: {
                                 text: 'default',
-                                icon: ''
+                                
                             }
                         },
                         multiple: false
@@ -155,16 +155,70 @@
         <section>
             <h3>skins</h3>
             <div class="example">
-                <div>skin-3:</div>
-                <select class="skin-3">
-                    <option value ="default" selected="selected">default</option>
+                <div>skin-1:</div>
+                <div class="skin-1"></div>
+                <!-- <select class="skin-1">
+                    <option value ="defaults" selected="selected">defaults</option>
                     <option value ="on" selected="selected">on</option>
                     <option value="off">off</option>
-                    <option value="default-1">default-1</option>
-                </select>
+                    <option value="other">other</option>
+                </select> -->
+                <script type="text/javascript">
+                    $('.skin-1').choice({
+                        skin: 'skin-1',
+                        status: {
+                            defaults: {
+                                
+                                icon: 'icon-1'
+                            },
+                            on: {
+                                
+                                icon: 'icon-2'
+                            },
+                            off: {
+                                
+                                icon: 'icon-3'
+                            },
+                            other: {
+                                
+                                icon: 'icon-4'
+                            }
+                        }
+                    });
+                </script>
+            </div>
+
+
+            <div class="example">
+                <div>skin-3:</div>
+                <div class="skin-3"></div>
+                <!-- <select class="skin-3">
+                    <option value ="defaults" selected="selected">defaults</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                    <option value="other">other</option>
+                </select> -->
                 <script type="text/javascript">
                     $('.skin-3').choice({
-                        skin: 'skin-3'
+                        skin: 'skin-3',
+                        status: {
+                            defaults: {
+                                
+                                icon: 'icon-1'
+                            },
+                            on: {
+                                
+                                icon: 'icon-2'
+                            },
+                            off: {
+                                
+                                icon: 'icon-3'
+                            },
+                            other: {
+                                
+                                icon: 'icon-4'
+                            }
+                        }
                     });
                 </script>
             </div>
@@ -172,7 +226,7 @@
             <div class="example">
                 <div>skin-6:</div>
                 <select class="skin-6">
-                    <option value ="default" selected="selected">default</option>
+                    <option value ="defaults" selected="selected">defaults</option>
                     <option value ="on" selected="selected">on</option>
                     <option value="off">off</option>
                     <option value="c">value</option>
@@ -186,30 +240,71 @@
 
             <div class="example">
                 <div>skin-2:</div>
-                <select class="skin-2">
-                    <option value ="default" selected="selected">default</option>
+                <div class="skin-2"></div>
+                <!-- <select class="skin-2">
+                    <option value ="defaults" selected="selected">defaults</option>
                     <option value ="on" selected="selected">on</option>
                     <option value="off">off</option>
                     <option value="c">value</option>
-                </select>
+                    
+                </select> -->
                 <script type="text/javascript">
                     $('.skin-2').choice({
-                        skin: 'skin-2'
+                        skin: 'skin-2',
+                        status: {
+                            defaults: {
+                                
+                                icon: 'icon-1'
+                            },
+                            on: {
+                                
+                                icon: 'icon-2'
+                            },
+                            off: {
+                                
+                                icon: 'icon-3'
+                            },
+                            c: {
+                                
+                                icon: 'icon-4'
+                            }
+                           
+                        }
                     });
                 </script>
             </div>
 
             <div class="example">
                 <div>skin-4:</div>
-                <select class="skin-4">
-                    <option value ="default" selected="selected">default</option>
-                    <option value ="on" selected="selected">on</option>
-                    <option value="off">off</option>
-                    <option value="c">value</option>
-                </select>
+                <div class="skin-4"></div>
+                <!-- <select class="skin-4">
+                    <option value ="defaults" selected="selected"></option>
+                    <option value ="on" selected="selected"></option>
+                    <option value="off"></option>
+                    <option value="c"></option>
+                </select> -->
                 <script type="text/javascript">
                     $('.skin-4').choice({
-                        skin: 'skin-4'
+                        skin: 'skin-4',
+                        status: {
+                            defaults: {
+                                
+                                icon: 'icon-1'
+                            },
+                            on: {
+                                
+                                icon: 'icon-2'
+                            },
+                            off: {
+                                
+                                icon: 'icon-3'
+                            },
+                            c: {
+                                
+                                icon: 'icon-4'
+                            }
+                           
+                        }
                     });
                 </script>
             </div>
@@ -220,7 +315,6 @@
 
 
 <script type="text/javascript">
-    console.log($('.select').prop('multiple'));
     (function(){
         $('#toc').toc();
     })();

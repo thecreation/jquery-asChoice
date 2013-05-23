@@ -13,8 +13,13 @@
 	background-color: #ebe7e3;
 	.inner-shadow(0px 2px 5px 1px darken(#ebe7e3,20%));
 
+	width: 168px;
+	height: 41px;
+
 	>li {
 		position: relative;
+		width: 25%;
+		height: 100%;
 		background-color: #f6f2ee;
 		border-top: 1px solid #fcfbfb;
 		border-bottom:1px solid #a29e9c;
@@ -32,15 +37,18 @@
 			content: "";
 			position: absolute;
 			z-index: 2;
-			top: 39px;
+			top: 42px;
 			left: 0;
-			height: 10px;
+			height: 12px;
 			width: 100%;
-			background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0)));
-			background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-			background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-			background-image: -o-linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-			background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+			/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+			background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+			background-image: -moz-linear-gradient(top,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+			background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+			background-image: -o-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+			background-image: -ms-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+			background-image: linear-gradient(to bottom,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* W3C */
 		}
 
 		&:before {
@@ -55,9 +63,11 @@
 			box-shadow: 0 3px 4px 0 #9F9B99;
 		}
 
-		>a {
+		>span {
 			display: block;
-			padding: 15px 19px;
+			width: 95%;
+			height: 95%;
+			// padding: 15px 19px;
 			
 			color: transparent;
 			font-size: 0;
@@ -85,14 +95,14 @@
 		&:first-child {
 			border-left: none;
 			border-radius: 2px 0 0 2px;
-			>a {
+			>span {
 				border-radius: 2px 0 0 2px;
 			}
 		}
 
 		&:last-child {
 			border-radius: 0 2px 2px 0;
-			>a {
+			>span {
 				border-radius: 0 2px 2px 0;
 				border-right: 1px solid rgba(255, 255, 255, 0.5);
 				border-right: 1px solid rgba(255, 255, 255, 0.5);
@@ -119,14 +129,14 @@
 			}
 
 			&:first-child {
-				>a {
+				>span {
 					&:before {
 						display: none;
 					}
 				}
 			}
 
-			>a {
+			>span {
 				border: 1px solid transparent;
 				&:after {
 					background-color: #b7b3b0;
@@ -143,30 +153,50 @@
 					background-color: #b7b3b0;
 				}
 			}
+
+			// .icon-1 {
+			// 	background-image: url("../images/skin4-icons.png");//../images/skin1-icons-active.png
+			// }
+
+			// .icon-2 {
+			// 	background-image: url("../images/skin4-CoverFlowIcon.png");//../images/skin1-CoverFlowIcon-active.png
+			// }
+
+			// .icon-3 {
+			// 	background-image: url("../images/skin4-list-active.png");
+			// }
+
+			// .icon-4 {
+			// 	background-image: url("../images/skin4-iconsAndList.png");//../images/skin1-iconsAndList-active.png
+			// }
 		}
 	}
 
- 	.opt1 {
-		>a {
-			background-image: url("../images/skin4-icons.png");
-		}
+ 	[class^="icon-"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
 	}
 
-	.opt2 {
-		>a {
-			background-image: url("../images/skin4-CoverFlowIcon.png");
-		}
+ 	.icon-1 {
+		background-image: url("../images/skin4-icons.png");
 	}
 
-	.opt3 {
-		>a {
-			background-image: url("../images/skin4-iconsAndList.png");
-		}
+	.icon-2 {
+		background-image: url("../images/skin4-CoverFlowIcon.png");
 	}
 
-	.opt4 {
-		>a {
-			background-image: url("../images/skin4-list.png");
-		}
+	.icon-3 {
+		background-image: url("../images/skin4-list.png");
+	}
+
+	.icon-4 {
+		background-image: url("../images/skin4-iconsAndList.png");
 	}
 }
