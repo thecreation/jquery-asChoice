@@ -44,7 +44,7 @@
         constuctor: Choice,
         init: function() {
             var self = this,
-                tpl = '<li></li>';
+                tpl = '<li><span class="' + self.namespace + '-text"></span></li>';
 
             this.$select.css({
                 display: 'none'
@@ -61,11 +61,11 @@
                         $('<i></i>').addClass(value.icon).appendTo($tpl);
                     }
                     if (value.text) {
-                        $('<span class="' + self.namespace + '-text"></span>').text(value.text).appendTo($tpl);
+                        $tpl.find('span').text(value.text);
                     }
                     
                 } else {
-                    $('<span class="' + self.namespace + '-text"></span>').text(value.text).appendTo($tpl);
+                    $tpl.find('span').text(value.text);
                 }
 
                 $.each(self.value, function(i, v) {
