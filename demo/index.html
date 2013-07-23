@@ -22,7 +22,7 @@
         <script src="js/vendor/prism.js"></script>
         <script src="js/vendor/bootstrap.js"></script>
 
-        <script src="../src/jquery.choice.js"></script>
+        <script src="../src/jquery-choice.js"></script>
     </head>
 
     <style type="text/css">
@@ -121,9 +121,18 @@
 &lt;script type="text/javascript"&gt;
     $('.blank').choice({
         status: {
-            a: 'on',
-            b: 'off',
-            c: 'default'
+            a: {
+                text: 'on',
+                
+            },
+            b: {
+                text: 'off',
+                
+            },
+            c: {
+                text: 'default',
+                
+            }
         },
         multiple: false
     });
