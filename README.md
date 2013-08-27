@@ -1,14 +1,16 @@
 # jQuery choice
 
-The powerful jQuery plugin that creates choice. <a href="http://amazingsurge.github.io/jquery-choice/">Project page and demos</a><br />
+The powerful jQuery plugin that a iphone like jquery checkbox plugin. <a href="http://amazingsurge.github.io/jquery-choice/">Project page and demos</a><br />
 Download: <a href="https://github.com/amazingSurge/jquery-choice/archive/master.zip">jquery-choice-master.zip</a>
 
 ***
 
 ## Features
 
-* **Keyboard navigation support** — use `Arrow left/right` to navigate
+* **Super easy implementation**
 * **Lightweight size** — 1 kb gzipped
+* **callbacks to handle changes** 
+* **Customization freedom** — use any HTML and CSS to style inputs
 
 ## Dependencies
 * <a href="http://jquery.com/" target="_blank">jQuery 1.83+</a>
@@ -65,50 +67,31 @@ $('.select').choice({
 
 ## Settings
 
-<table>
-    <thead>
-        <tr>
-            <th>Property</th>
-            <th>Default</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>skin</td>
-            <td>null</td>
-            <td>Optional property, set transition effect, it works after you load   specified skin file</td>
-        </tr>
-        <tr>
-            <td>status</td>
-            <td>
-                a:{
-                  text: 'on',
-                  icon: 'icon-1'
-                  },
-                b:{
-                  text: 'off',
-                  icon: 'icon-2'
-                  },
-                c:{
-                  text: 'default',
-                  icon: 'icon-3'
-                  }
-            </td>
-            <td>Optional property, set the status of elements,for example <code>a:{text: 'on',icon: 'icon1'}</code> means the element,s value is a,the text is on and it will add a icon'</td>
-        </tr>
-        <tr>
-            <td>value</td>
-            <td>['default']</td>
-            <td>Optional property, set the value for element when choice initilize</td>
-        </tr>
-        <tr>
-            <td>Onchange</td>
-            <td>function(){}</td>
-            <td>callback</td>
-        </tr>
-    </tbody>
-</table>
+```javascript
+    //Optional property, choose choice's skin, more skins is coming soon
+    skin: null,
+
+    //Optional property, set the status of elements,for example 
+    //<code>a:{text: 'on',icon: 'icon1'}</code> means the element's 
+    //value is 'a',the text is 'on' and it will add a icon'
+    status: a:{
+                text: 'on',
+                icon: 'icon-1'
+              },
+            b:{
+                text: 'off',
+                icon: 'icon-2'
+              },
+            c:{
+                text: 'default',
+                icon: 'icon-3'
+              },
+    //Optional property, set the value for element when choice initilize
+    value: ['default'],
+
+    //callback when choice's value change
+    Onchange: function(){}
+```
 
 ## Public methods
 
