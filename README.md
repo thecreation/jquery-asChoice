@@ -111,6 +111,13 @@ $(".select").choice("disable");
 
 * <code>change</code>: trigger when element set afresh
 
+how to use event:
+```javascript
+$(document).on('change', function(event,instance) {
+    // instance means current choice instance 
+    // some stuff
+});
+```
 ## Browser support
 jquery-choice is verified to work in Internet Explorer 7+, Firefox 2+, Opera 9+, Google Chrome and Safari browsers. Should also work in many others.
 
@@ -120,10 +127,7 @@ Mobile browsers (like Opera mini, Chrome mobile, Safari mobile, Android browser 
 
 | Version | Notes                                                            |
 |---------|------------------------------------------------------------------|
-|   0.1.x | ([compare][compare-1.1]) add keyboard function                   |
 |     ... | ...                                                              |
-
-[compare-1.1]: https://github.com/amazingSurge/jquery-choice/compare/v1.1.0...v1.2.0
 
 ## Author
 [amazingSurge](http://amazingSurge.com)
