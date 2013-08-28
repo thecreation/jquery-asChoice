@@ -1,11 +1,10 @@
-/*! Itoggle - v0.1.0 - 2013-07-23
+/*! jquery choice - v0.1.0 - 2013-08-28
 * https://github.com/amazingSurge/jquery-choice
-* Copyright (c) 2013 joeylin; Licensed MIT */
+* Copyright (c) 2013 amazingSurge; Licensed GPL */
 (function($) {
     "use strict";
 
     var Choice = $.choice = function(select, options) {
-
         this.select = select;
         this.$select = $(select);
 
@@ -29,6 +28,10 @@
         this.options = $.extend({}, Choice.defaults, options, meta);
         this.namespace = this.options.namespace;
         this.status = this.options.status;
+
+        this.classes = {
+            selected: this.namespace + '-selected'
+        };
 
         this.value = [];
 
@@ -65,7 +68,7 @@
 
                 $.each(self.value, function(i, v) {
                     if (v === key) {
-                        $tpl.addClass(self.namespace + '-selected');
+                        $tpl.addClass(self.classes.selected);
                     }
                 });
 
@@ -74,15 +77,15 @@
 
             this.$select.after(this.$wrap);
 
-            // cancel a link
+            // unselected a link
             this.$wrap.find('a').on('click', function(e) {
                 e.preventDefault();
             });
 
             if (this.options.multiple === true) {
                 this.$wrap.delegate('li', 'click', function() {
-                    if ($(this).hasClass(self.namespace + '-selected')) {
-                        self.set.call(self, $(this).data('value'), 'cancel');
+                    if ($(this).hasClass(self.classes.selected)) {
+                        self.set.call(self, $(this).data('value'), 'unselected');
                         return false;
                     } else {
                         self.set.call(self, $(this).data('value'), 'selected');
@@ -99,12 +102,9 @@
                 });
                 this.set(this.options.value[0], 'selected');
             }
-        },
 
-        /*
-            Public Method
-         */
-        
+            this.$select.trigger('choice::ready', this);
+        },
         set: function(value, status) {
             var $option, $li,
                 pos = $.inArray(value, this.value);
@@ -123,26 +123,25 @@
 
                 if (status === 'selected') {
                     this.value.push(value);
-                    $li.addClass(this.namespace + '-selected');
+                    $li.addClass(this.classes.selected);
                     $option.prop('selected', true);
 
                 } else {
                     this.value.splice(pos, 1);
-                    $li.removeClass(this.namespace + '-selected');
+                    $li.removeClass(this.classes.selected);
                     $option.prop('selected', false);
                 }
 
-                this.$select.trigger('change', value);
+                this.$select.trigger('choice::change', this);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange(this);
                 }
-
             } else {
                 if (value === this.value[0]) {
                     return false;
                 }
 
-                if (status === 'cancel') {
+                if (status === 'unselected') {
                     return false;
                 }
 
@@ -150,7 +149,6 @@
                 $.each(this.$options, function(i, v) {
                     if ($(v).attr('value') === value) {
                         $(v).prop('selected', true);
-
                     } else {
                         $(v).prop('selected', false);
                     }
@@ -158,18 +156,30 @@
 
                 $.each(this.$wrap.find('li'), function(i, v) {
                     if ($(v).data('value') === value) {
-                        $(v).addClass(self.namespace + '-selected');
+                        $(v).addClass(self.classes.selected);
                         self.value[0] = value;
 
                     } else {
-                        $(v).removeClass(self.namespace + '-selected');
+                        $(v).removeClass(self.classes.selected);
                     }
                 });
 
-                this.$select.trigger('change', value);
+                this.$select.trigger('choice::change', this);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange(this);
                 }
+            }
+        },
+
+        /*
+            Public Method
+         */
+        
+        val: function(value, status) {
+            if (value && status) {
+                this.set(value, status);
+            } else {
+                return this.value;
             }
         },
         enable: function() {

@@ -162,6 +162,45 @@
             </div>
         </section>
         <section>
+            <h3>Event</h3>
+            <div class="example">
+                <select class="select-event" multiple="multiple">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+                <div class="consoleEvent" style="height:200px; overflow:hidden; border: 1px solid #888"></div>
+                <script>                   
+                    $(document).ready(function() {
+                        $('.select-event').on('choice::ready', function(event,instance) {
+                            var text = event.type + ': triggered'; 
+                            $('<div>'+ text +'</div>').prependTo('.consoleEvent');
+                        });
+
+                        $('.select-event').choice({
+                            status: {
+                                a: {
+                                    text: 'on'
+                                },
+                                b: {
+                                    text: 'off'
+                                },
+                                c: {
+                                    text: 'default'
+                                }
+                            },
+                            multiple: true,
+                            skin: 'skin-6'
+                        }); 
+                        $('.select-event').on('choice::change', function(event,instance) {
+                            var text = event.type + ': triggered;   selected value: ' + instance.val().join(',');
+                            $('<div>'+ text +'</div>').prependTo('.consoleEvent');
+                        });           
+                    });
+                </script>
+            </div>
+        </section>
+        <section>
             <h3>skins</h3>
             <div class="example">
                 <div>skin-1:</div>
@@ -317,8 +356,8 @@
                     });
                 </script>
             </div>
-
         </section>
+
     </section>
 </div>
 
