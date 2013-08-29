@@ -39,7 +39,6 @@
         };
 
         this.value = [];
-
         this.init();
     };
 
@@ -88,7 +87,7 @@
             });
 
             if (this.options.multiple === true) {
-                this.$wrap.delegate('li', 'click', function() {
+                this.$wrap.delegate('li', 'click.choice touchstart.choice', function() {
                     if ($(this).hasClass(self.classes.selected)) {
                         self.set.call(self, $(this).data('value'), 'unselected');
                         return false;
@@ -102,7 +101,7 @@
                     self.set.call(self, v, 'selected');
                 });
             } else {
-                this.$wrap.on('li', 'click.choice', function() {
+                this.$wrap.delegate('li', 'click.choice touchstart.choice', function() {
                     self.set($(this).data('value'), 'selected');
                 });
                 this.set(this.options.value[0], 'selected');
@@ -196,7 +195,7 @@
             return this;
         },
         destroy: function() {
-            this.$wrap.off('.chioce');
+            this.$wrap.undelegate('.chioce');
         }
     };
 
