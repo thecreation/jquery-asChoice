@@ -1,9 +1,9 @@
 {
   "name": "choice",
   "title": "jQuery choice",
-  "description": "The powerful jQuery plugin that creates a tab",
+  "description": "The powerful jQuery plugin create select",
   "keywords": [],
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": {
     "name": "amazingSurge",
     "email": "amazingSurge@yahoo.com",
