@@ -67,7 +67,7 @@ module.exports = function(grunt) {
         },
 
         jsbeautifier: {
-            files: ["Gruntfile.js", "src/**/*.js"],
+            files: ["Gruntfile.js", "src/**/*.js", 'test/**/*.js'],
             options: {
                 "indent_size": 4,
                 "indent_char": " ",
@@ -99,17 +99,19 @@ module.exports = function(grunt) {
                 src: ['bower.json'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
-                    from: /("version": ")([0-9\.]+)(")/g,
-                    to: "$1<%= pkg.version %>$3"
-                }]
+                        from: /("version": ")([0-9\.]+)(")/g,
+                        to: "$1<%= pkg.version %>$3"
+                    }
+                ]
             },
             jquery: {
                 src: ['choice.jquery.json'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
-                    from: /("version": ")([0-9\.]+)(")/g,
-                    to: "$1<%= pkg.version %>$3"
-                }]
+                        from: /("version": ")([0-9\.]+)(")/g,
+                        to: "$1<%= pkg.version %>$3"
+                    }
+                ]
             },
         }
     });
@@ -133,8 +135,8 @@ module.exports = function(grunt) {
     grunt.registerTask('css', ['recess']);
 
     grunt.registerTask('version', [
-        'replace:bower',
-        'replace:jquery'
+            'replace:bower',
+            'replace:jquery'
     ]);
 
 };

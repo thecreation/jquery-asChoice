@@ -71,7 +71,7 @@
                     if (value.text) {
                         $tpl.find('span').text(value.text);
                     }
-                    
+
                 } else {
                     $tpl.find('span').text(value.text);
                 }
@@ -188,7 +188,7 @@
         /*
             Public Method
          */
-        
+
         val: function(value, status) {
             var self = this;
 
@@ -201,7 +201,7 @@
                 } else {
                     // value is array
                     var options = this.$wrap.find('li');
-                    $.each(options, function(key,li) {
+                    $.each(options, function(key, li) {
                         var data = $(li).data('value');
                         if ($.inArray(data, value)) {
                             self.set(data, 'selected');
@@ -239,7 +239,7 @@
 
     Choice.defaults = {
         skin: null,
-        
+
         // status: {
         //     a: {
         //         text: 'on',
@@ -284,5 +284,3 @@
         }
     };
 }(jQuery));
-
-
