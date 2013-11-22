@@ -35,10 +35,13 @@
         this.status = this.options.status;
 
         this.classes = {
-            selected: this.namespace + '-selected'
+            selected: this.namespace + '-selected',
+            disabled: this.namespace + '-disabled',
+            skin: this.namespace + '_' + this.options.skin
         };
 
         this.value = [];
+        this.disabled = false;
         this.init();
     };
 
@@ -53,7 +56,10 @@
             });
 
             this.$wrap = $('<ul></ul>');
-            this.$wrap.addClass(this.namespace).addClass(this.options.skin);
+            this.$wrap.addClass(this.namespace);
+            if (this.options.skin) {
+                this.$wrap.addClass(this.classes.skin);
+            }
 
             $.each(this.status, function(key, value) {
                 var $tpl = $(tpl).data('value', key);
@@ -82,7 +88,7 @@
             this.$select.after(this.$wrap);
 
             // unselected a link
-            this.$wrap.find('a').on('click', function(e) {
+            this.$wrap.find('a').on('click.choice', function(e) {
                 e.preventDefault();
             });
 
@@ -113,6 +119,10 @@
             var $option, $li,
                 pos = $.inArray(value, this.value);
 
+            if (this.disabled) {
+                return;
+            }
+
             if (this.options.multiple === true) {
                 $.each(this.$options, function(i, v) {
                     if ($(v).attr('value') === value) {
@@ -138,7 +148,7 @@
 
                 this.$select.trigger('choice::change', this);
                 if (typeof this.options.onChange === 'function') {
-                    this.options.onChange(this);
+                    this.options.onChange.call(this, this.value);
                 }
             } else {
                 if (value === this.value[0]) {
@@ -170,7 +180,7 @@
 
                 this.$select.trigger('choice::change', this);
                 if (typeof this.options.onChange === 'function') {
-                    this.options.onChange(this);
+                    this.options.onChange.call(this, this.value);
                 }
             }
         },
@@ -187,15 +197,19 @@
             }
         },
         enable: function() {
-            this.enable = true;
+            this.disabled = false;
+            this.$wrap.removeClass(this.classes.disabled);
             return this;
         },
         disable: function() {
-            this.enable = false;
+            this.disabled = true;
+            this.$wrap.addClass(this.classes.disabled);
             return this;
         },
         destroy: function() {
-            this.$wrap.undelegate('.chioce');
+            this.$wrap.undelegate('.choice');
+            this.$wrap.find('a').off('.choice');
+            this.$wrap.remove();
         }
     };
 
