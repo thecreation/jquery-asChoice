@@ -155,7 +155,7 @@
                     return false;
                 }
 
-                if (status === 'unselected') {
+                if (status !== 'selected') {
                     return false;
                 }
 
@@ -190,10 +190,34 @@
          */
         
         val: function(value, status) {
+            var self = this;
+
             if (value && status) {
                 this.set(value, status);
+            } else if (value) {
+                if (typeof value === 'string') {
+                    // value is string 
+                    this.set(value, 'selected');
+                } else {
+                    // value is array
+                    var options = this.$wrap.find('li');
+                    $.each(options, function(key,li) {
+                        var data = $(li).data('value');
+                        if ($.inArray(data, value)) {
+                            self.set(data, 'selected');
+                        } else {
+                            self.set(data, 'unselected');
+                        }
+                    });
+                }
             } else {
-                return this.value;
+                if (this.value.length <= 1) {
+                    // return a string value
+                    return this.value[0];
+                } else {
+                    // return array
+                    return this.value;
+                }
             }
         },
         enable: function() {
