@@ -1,7 +1,7 @@
-# jQuery choice
+# jQuery asChoice
 
-The powerful jQuery plugin that a iphone like jquery checkbox plugin. <a href="http://amazingsurge.github.io/jquery-choice/">Project page and demos</a><br />
-Download: <a href="https://github.com/amazingSurge/jquery-choice/archive/master.zip">jquery-choice-master.zip</a>
+The powerful jQuery plugin that a iphone like jquery checkbox plugin. <a href="http://amazingsurge.github.io/jquery-asChoice/">Project page and demos</a><br />
+Download: <a href="https://github.com/amazingSurge/jquery-asChoice/archive/master.zip">jquery-asChoice-master.zip</a>
 
 ***
 
@@ -19,10 +19,10 @@ Download: <a href="https://github.com/amazingSurge/jquery-choice/archive/master.
 
 Import this libraries:
 * jQuery
-* jquery-choice.min.js
+* jquery-asChoice.min.js
 
 And CSS:
-* jquery-choice.css - desirable if you have not yet connected one
+* jquery-asChoice.css - desirable if you have not yet connected one
 
 
 Create base html element:
@@ -41,7 +41,7 @@ $(".demo").tabs({panes: '.panes'});
 
 Or initialize tabs with custom settings:
 ```javascript
-$('.select').choice({
+$('.select').asChoice({
         skin: null,        
         status: {
          a: {
@@ -59,7 +59,7 @@ $('.select').choice({
          },
         multiple: false,
         value: ['default'],
-        namespace: 'choice'
+        namespace: 'asChoice'
 });
 ```
 
@@ -68,7 +68,7 @@ $('.select').choice({
 ## Settings
 
 ```javascript
-    //Optional property, choose choice's skin, more skins is coming soon
+    //Optional property, choose asChoice's skin, more skins is coming soon
     skin: null,
 
     //Optional property, set the status of elements,for example 
@@ -86,25 +86,25 @@ $('.select').choice({
                 text: 'default',
                 icon: 'icon-3'
               },
-    //Optional property, set the value for element when choice initilize
+    //Optional property, set the value for element when asChoice initilize
     value: ['default'],
 
-    //callback when choice's value change
+    //callback when asChoice's value change
     Onchange: function(){}
 ```
 
 ## Public methods
 
-jquery choice has different methods , we can use it as below :
+jquery asChoice has different methods , we can use it as below :
 ```javascript
 // set element's value and status
-$(".select").choice("set");
+$(".select").asChoice("set");
 
 // set enable true
-$(".select").choice("enable");
+$(".select").asChoice("enable");
 
 // set enable false
-$(".select").choice("disable");
+$(".select").asChoice("disable");
 ```
 
 ## Event / Callback
@@ -114,12 +114,12 @@ $(".select").choice("disable");
 how to use event:
 ```javascript
 $(document).on('change', function(event,instance) {
-    // instance means current choice instance 
+    // instance means current asChoice instance 
     // some stuff
 });
 ```
 ## Browser support
-jquery-choice is verified to work in Internet Explorer 7+, Firefox 2+, Opera 9+, Google Chrome and Safari browsers. Should also work in many others.
+jquery-asChoice is verified to work in Internet Explorer 7+, Firefox 2+, Opera 9+, Google Chrome and Safari browsers. Should also work in many others.
 
 Mobile browsers (like Opera mini, Chrome mobile, Safari mobile, Android browser and others) is coming soon.
 
@@ -133,6 +133,6 @@ Mobile browsers (like Opera mini, Chrome mobile, Safari mobile, Android browser 
 [amazingSurge](http://amazingSurge.com)
 
 ## License
-jQuery-choice plugin is released under the <a href="https://github.com/amazingSurge/jquery-choice/blob/master/LICENCE.GPL" target="_blank">GPL licence</a>.
+jQuery-asChoice plugin is released under the <a href="https://github.com/amazingSurge/jquery-asChoice/blob/master/LICENCE.GPL" target="_blank">GPL licence</a>.
 
 
