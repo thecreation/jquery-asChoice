@@ -1,15 +1,15 @@
 {
-  "name": "jquery-choice",
-  "version": "0.2.0",
-  "main": "dist/jquery-choice.js",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": ">=1.8.3"
-  }
+    "name": "jquery-asChoice",
+    "version": "0.2.0",
+    "main": "dist/jquery-asChoice.js",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": ">=1.8.3"
+    }
 }

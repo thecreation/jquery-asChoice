@@ -1,6 +1,6 @@
 /*
- * choice
- * https://github.com/amazingSurge/choice
+ * asChoice
+ * https://github.com/amazingSurge/asChoice
  *
  * Copyright (c) 2013 amazingSurge
  * Licensed under the GPL license.
@@ -9,7 +9,7 @@
 (function($) {
     "use strict";
 
-    var Choice = $.choice = function(select, options) {
+    var AsChoice = $.asChoice = function(select, options) {
         this.select = select;
         this.$select = $(select);
 
@@ -30,7 +30,7 @@
             });
         }
 
-        this.options = $.extend({}, Choice.defaults, options, meta);
+        this.options = $.extend({}, AsChoice.defaults, options, meta);
         this.namespace = this.options.namespace;
         this.status = this.options.status;
 
@@ -45,8 +45,8 @@
         this.init();
     };
 
-    Choice.prototype = {
-        constuctor: Choice,
+    AsChoice.prototype = {
+        constuctor: AsChoice,
         init: function() {
             var self = this,
                 tpl = '<li><span class="' + self.namespace + '-text"></span></li>';
@@ -88,12 +88,12 @@
             this.$select.after(this.$wrap);
 
             // unselected a link
-            this.$wrap.find('a').on('click.choice', function(e) {
+            this.$wrap.find('a').on('click.asChoice', function(e) {
                 e.preventDefault();
             });
 
             if (this.options.multiple === true) {
-                this.$wrap.delegate('li', 'click.choice touchstart.choice', function() {
+                this.$wrap.delegate('li', 'click.asChoice touchstart.asChoice', function() {
                     if ($(this).hasClass(self.classes.selected)) {
                         self.set.call(self, $(this).data('value'), 'unselected');
                         return false;
@@ -107,13 +107,13 @@
                     self.set.call(self, v, 'selected');
                 });
             } else {
-                this.$wrap.delegate('li', 'click.choice touchstart.choice', function() {
+                this.$wrap.delegate('li', 'click.asChoice touchstart.asChoice', function() {
                     self.set($(this).data('value'), 'selected');
                 });
                 this.set(this.options.value[0], 'selected');
             }
 
-            this.$select.trigger('choice::ready', this);
+            this.$select.trigger('asChoice::ready', this);
         },
         set: function(value, status) {
             var $option, $li,
@@ -146,7 +146,7 @@
                     $option.prop('selected', false);
                 }
 
-                this.$select.trigger('choice::change', this);
+                this.$select.trigger('asChoice::change', this);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange.call(this, this.value);
                 }
@@ -178,7 +178,7 @@
                     }
                 });
 
-                this.$select.trigger('choice::change', this);
+                this.$select.trigger('asChoice::change', this);
                 if (typeof this.options.onChange === 'function') {
                     this.options.onChange.call(this, this.value);
                 }
@@ -211,13 +211,7 @@
                     });
                 }
             } else {
-                if (this.value.length <= 1) {
-                    // return a string value
-                    return this.value[0];
-                } else {
-                    // return array
-                    return this.value;
-                }
+                return this.value;
             }
         },
         enable: function() {
@@ -231,13 +225,13 @@
             return this;
         },
         destroy: function() {
-            this.$wrap.undelegate('.choice');
-            this.$wrap.find('a').off('.choice');
+            this.$wrap.undelegate('.asChoice');
+            this.$wrap.find('a').off('.asChoice');
             this.$wrap.remove();
         }
     };
 
-    Choice.defaults = {
+    AsChoice.defaults = {
         skin: null,
 
         // status: {
@@ -258,27 +252,27 @@
         multiple: false,
         value: ['default'],
 
-        namespace: 'choice'
+        namespace: 'asChoice'
         // onChange: function(instance) {
 
         // }
     };
 
-    $.fn.choice = function(options) {
+    $.fn.asChoice = function(options) {
         if (typeof options === 'string') {
             var method = options;
             var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : undefined;
 
             return this.each(function() {
-                var api = $.data(this, 'choice');
+                var api = $.data(this, 'asChoice');
                 if (typeof api[method] === 'function') {
                     api[method].apply(api, method_arguments);
                 }
             });
         } else {
             return this.each(function() {
-                if (!$.data(this, 'choice')) {
-                    $.data(this, 'choice', new Choice(this, options));
+                if (!$.data(this, 'asChoice')) {
+                    $.data(this, 'asChoice', new AsChoice(this, options));
                 }
             });
         }

@@ -1,35 +1,33 @@
 {
-  "name": "jquery-choice",
-  "title": "jquery choice",
-  "description": "a iphone like jquery checkbox plugin",
-  "version": "0.2.0",
-  "homepage": "https://github.com/amazingSurge/jquery-choice",
-  "author": {
-    "name": "amazingSurge",
-    "email": "amazingSurge@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/amazingSurge/jquery-choice.git"
-  },
-  "bugs": "https://github.com/amazingSurge/jquery-choice/issues",
-  "licenses": [
-    {
-      "type": "GPL",
-      "url": "https://github.com/amazingSurge/jquery-choice/blob/master/LICENSE-GPL"
+    "name": "jquery-asChoice",
+    "title": "jquery asChoice",
+    "description": "a iphone like jquery checkbox plugin",
+    "version": "0.2.0",
+    "homepage": "https://github.com/amazingSurge/jquery-asChoice",
+    "author": {
+        "name": "amazingSurge",
+        "email": "amazingSurge@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/amazingSurge/jquery-asChoice.git"
+    },
+    "bugs": "https://github.com/amazingSurge/jquery-asChoice/issues",
+    "licenses": [{
+        "type": "GPL",
+        "url": "https://github.com/amazingSurge/jquery-asChoice/blob/master/LICENSE-GPL"
+    }],
+    "devDependencies": {
+        "grunt-contrib-jshint": "~0.1.1",
+        "grunt-contrib-concat": "~0.1.2",
+        "grunt-contrib-uglify": "~0.1.1",
+        "grunt-contrib-watch": "~0.2.0",
+        "grunt-contrib-clean": "~0.4.0",
+        "grunt": "~0.4.1",
+        "grunt-jsbeautifier": "~0.1.6",
+        "grunt-recess": "~0.3.1"
+    },
+    "dependencies": {
+        "grunt-text-replace": "~0.3.6"
     }
-  ],
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-concat": "~0.1.2",
-    "grunt-contrib-uglify": "~0.1.1",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt": "~0.4.1",
-    "grunt-jsbeautifier": "~0.1.6",
-    "grunt-recess": "~0.3.1"
-  },
-  "dependencies": {
-    "grunt-text-replace": "~0.3.6"
-  }
 }

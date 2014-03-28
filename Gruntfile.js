@@ -87,8 +87,8 @@ module.exports = function(grunt) {
         },
         recess: {
             core: {
-                src: ["less/jquery-choice.less"],
-                dest: 'demo/css/choice.css',
+                src: ["less/jquery-asChoice.less"],
+                dest: 'demo/css/asChoice.css',
                 options: {
                     compile: true
                 }
@@ -99,19 +99,17 @@ module.exports = function(grunt) {
                 src: ['bower.json'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
-                        from: /("version": ")([0-9\.]+)(")/g,
-                        to: "$1<%= pkg.version %>$3"
-                    }
-                ]
+                    from: /("version": ")([0-9\.]+)(")/g,
+                    to: "$1<%= pkg.version %>$3"
+                }]
             },
             jquery: {
-                src: ['choice.jquery.json'],
+                src: ['asChoice.jquery.json'],
                 overwrite: true, // overwrite matched source files
                 replacements: [{
-                        from: /("version": ")([0-9\.]+)(")/g,
-                        to: "$1<%= pkg.version %>$3"
-                    }
-                ]
+                    from: /("version": ")([0-9\.]+)(")/g,
+                    to: "$1<%= pkg.version %>$3"
+                }]
             },
         }
     });
@@ -135,8 +133,8 @@ module.exports = function(grunt) {
     grunt.registerTask('css', ['recess']);
 
     grunt.registerTask('version', [
-            'replace:bower',
-            'replace:jquery'
+        'replace:bower',
+        'replace:jquery'
     ]);
 
 };
