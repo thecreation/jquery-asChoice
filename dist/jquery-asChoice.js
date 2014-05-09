@@ -1,4 +1,4 @@
-/*! jquery asChoice - v0.2.0 - 2014-03-28
+/*! jquery asChoice - v0.2.0 - 2014-05-09
 * https://github.com/amazingSurge/jquery-asChoice
 * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function($) {
@@ -23,6 +23,12 @@
                     meta.value.push($(v).attr('value'));
                 }
             });
+        }
+
+        if (this.$select.attr('name')) {
+            this.name = this.$select.attr('name');
+        } else {
+            this.name = options.name;
         }
 
         this.options = $.extend({}, AsChoice.defaults, options, meta);
@@ -206,13 +212,7 @@
                     });
                 }
             } else {
-                if (this.value.length <= 1) {
-                    // return a string value
-                    return this.value[0];
-                } else {
-                    // return array
-                    return this.value;
-                }
+                return this.value;
             }
         },
         enable: function() {
@@ -252,6 +252,7 @@
 
         multiple: false,
         value: ['default'],
+        name: null,
 
         namespace: 'asChoice'
         // onChange: function(instance) {

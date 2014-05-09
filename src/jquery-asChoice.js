@@ -30,6 +30,12 @@
             });
         }
 
+        if (this.$select.attr('name')) {
+            this.name = this.$select.attr('name');
+        } else {
+            this.name = options.name;
+        }
+
         this.options = $.extend({}, AsChoice.defaults, options, meta);
         this.namespace = this.options.namespace;
         this.status = this.options.status;
@@ -251,6 +257,7 @@
 
         multiple: false,
         value: ['default'],
+        name: null,
 
         namespace: 'asChoice'
         // onChange: function(instance) {
