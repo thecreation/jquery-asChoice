@@ -1,4 +1,4 @@
-/*! jquery asChoice - v0.2.0 - 2014-05-09
+/*! jquery asChoice - v0.2.0 - 2014-05-13
 * https://github.com/amazingSurge/jquery-asChoice
 * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function($) {
@@ -43,6 +43,7 @@
 
         this.value = [];
         this.disabled = false;
+        this._trigger('init');
         this.init();
     };
 
@@ -114,7 +115,22 @@
                 this.set(this.options.value[0], 'selected');
             }
 
-            this.$select.trigger('asChoice::ready', this);
+            this._trigger('ready');
+        },
+        _trigger: function(eventType) {
+            // event
+            this.$select.trigger('asColorInput::' + eventType, this);
+            this.$select.trigger(eventType + '.asColorInput', this);
+
+            // callback
+            eventType = eventType.replace(/\b\w+\b/g, function(word) {
+                return word.substring(0, 1).toUpperCase() + word.substring(1);
+            });
+            var onFunction = 'on' + eventType;
+            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : undefined;
+            if (typeof this.options[onFunction] === 'function') {
+                this.options[onFunction].apply(this, method_arguments);
+            }
         },
         set: function(value, status) {
             var $option, $li,
@@ -147,10 +163,7 @@
                     $option.prop('selected', false);
                 }
 
-                this.$select.trigger('asChoice::change', this);
-                if (typeof this.options.onChange === 'function') {
-                    this.options.onChange.call(this, this.value);
-                }
+                this._trigger('change');
             } else {
                 if (value === this.value[0]) {
                     return false;
@@ -178,11 +191,7 @@
                         $(v).removeClass(self.classes.selected);
                     }
                 });
-
-                this.$select.trigger('asChoice::change', this);
-                if (typeof this.options.onChange === 'function') {
-                    this.options.onChange.call(this, this.value);
-                }
+                this._trigger('change');
             }
         },
 
