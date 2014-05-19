@@ -124,8 +124,8 @@
         },
         _trigger: function(eventType) {
             // event
-            this.$select.trigger('asColorInput::' + eventType, this);
-            this.$select.trigger(eventType + '.asColorInput', this);
+            this.$select.trigger('asChoice::' + eventType, this);
+            this.$select.trigger(eventType + '.asChoice', this);
 
             // callback
             eventType = eventType.replace(/\b\w+\b/g, function(word) {
