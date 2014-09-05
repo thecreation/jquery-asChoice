@@ -1,6 +1,5 @@
 # jQuery asChoice
 
-The powerful jQuery plugin that a iphone like jquery checkbox plugin. <a href="http://amazingsurge.github.io/jquery-asChoice/">Project page and demos</a><br />
 Download: <a href="https://github.com/amazingSurge/jquery-asChoice/archive/master.zip">jquery-asChoice-master.zip</a>
 
 ***
@@ -8,7 +7,7 @@ Download: <a href="https://github.com/amazingSurge/jquery-asChoice/archive/maste
 ## Features
 
 * **Super easy implementation**
-* **Lightweight size** — 1 kb gzipped
+* **Lightweight size**
 * **callbacks to handle changes** 
 * **Customization freedom** — use any HTML and CSS to style inputs
 
@@ -23,7 +22,6 @@ Import this libraries:
 
 And CSS:
 * jquery-asChoice.css - desirable if you have not yet connected one
-
 
 Create base html element:
 ```html
@@ -123,16 +121,8 @@ jquery-asChoice is verified to work in Internet Explorer 7+, Firefox 2+, Opera 9
 
 Mobile browsers (like Opera mini, Chrome mobile, Safari mobile, Android browser and others) is coming soon.
 
-## Changes
-
-| Version | Notes                                                            |
-|---------|------------------------------------------------------------------|
-|     ... | ...                                                              |
-
 ## Author
 [amazingSurge](http://amazingSurge.com)
 
 ## License
 jQuery-asChoice plugin is released under the <a href="https://github.com/amazingSurge/jquery-asChoice/blob/master/LICENCE.GPL" target="_blank">GPL licence</a>.
-
-

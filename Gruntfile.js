@@ -8,9 +8,12 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
+        // -- clean config ----------------------------------------------------------
         clean: {
             files: ['dist']
         },
+
+        // -- concat config ----------------------------------------------------------
         concat: {
             options: {
                 banner: '<%= banner %>',
@@ -21,6 +24,8 @@ module.exports = function(grunt) {
                 dest: 'dist/<%= pkg.name %>.js'
             },
         },
+
+        // -- uglify config ----------------------------------------------------------
         uglify: {
             options: {
                 banner: '<%= banner %>'
@@ -31,6 +36,7 @@ module.exports = function(grunt) {
             },
         },
 
+        // -- jshint config ----------------------------------------------------------
         jshint: {
             gruntfile: {
                 options: {
@@ -43,14 +49,10 @@ module.exports = function(grunt) {
                     jshintrc: 'src/.jshintrc'
                 },
                 src: ['src/**/*.js']
-            },
-            test: {
-                options: {
-                    jshintrc: 'test/.jshintrc'
-                },
-                src: ['test/**/*.js']
-            },
+            }
         },
+
+        // -- watch config ----------------------------------------------------------
         watch: {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
@@ -59,15 +61,12 @@ module.exports = function(grunt) {
             src: {
                 files: '<%= jshint.src.src %>',
                 tasks: ['jshint:src', 'qunit']
-            },
-            test: {
-                files: '<%= jshint.test.src %>',
-                tasks: ['jshint:test', 'qunit']
-            },
+            }
         },
 
+        // -- replace config ----------------------------------------------------------
         jsbeautifier: {
-            files: ["Gruntfile.js", "src/**/*.js", 'test/**/*.js'],
+            files: ["Gruntfile.js", "src/**/*.js"],
             options: {
                 "indent_size": 4,
                 "indent_char": " ",
@@ -85,15 +84,30 @@ module.exports = function(grunt) {
                 "unescape_strings": false
             }
         },
-        recess: {
-            core: {
-                src: ["less/jquery-asChoice.less"],
-                dest: 'demo/css/asChoice.css',
-                options: {
-                    compile: true
+
+        // -- less config ----------------------------------------------------------
+        less: {
+            dist: {
+                files: {
+                    'demo/css/asChoice.css': ['less/asChoice.less']
                 }
-            },
+            }
         },
+
+        // -- autoprefixer config ----------------------------------------------------------
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.3', 'android 4', 'opera 12']
+            },
+            src: {
+                expand: true,
+                cwd: 'demo/css/',
+                src: ['asChoice.css'],
+                dest: 'demo/css/'
+            }
+        },
+
+        // -- replace config ----------------------------------------------------------
         replace: {
             bower: {
                 src: ['bower.json'],
@@ -114,23 +128,17 @@ module.exports = function(grunt) {
         }
     });
 
-    // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.loadNpmTasks('grunt-jsbeautifier');
-    grunt.loadNpmTasks('grunt-recess');
-    grunt.loadNpmTasks('grunt-text-replace');
+    // Load npm plugins to provide necessary tasks.
+    require('load-grunt-tasks')(grunt, {
+        pattern: ['grunt-*']
+    });
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-    grunt.registerTask('dist', ['concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'dist']);
 
+    grunt.registerTask('dist', ['clean', 'concat', 'uglify']);
     grunt.registerTask('js', ['jsbeautifier', 'jshint']);
-    grunt.registerTask('css', ['recess']);
+    grunt.registerTask('css', ['less', 'autoprefixer']);
 
     grunt.registerTask('version', [
         'replace:bower',

@@ -2,10 +2,9 @@
  * asChoice
  * https://github.com/amazingSurge/asChoice
  *
- * Copyright (c) 2013 amazingSurge
+ * Copyright (c) 2014 amazingSurge
  * Licensed under the GPL license.
  */
-
 (function($) {
     "use strict";
 
@@ -28,12 +27,6 @@
                     meta.value.push($(v).attr('value'));
                 }
             });
-        }
-
-        if (this.$select.attr('name')) {
-            this.name = this.$select.attr('name');
-        } else {
-            this.name = options.name;
         }
 
         this.options = $.extend({}, AsChoice.defaults, options, meta);
@@ -203,7 +196,6 @@
         /*
             Public Method
          */
-
         val: function(value, status) {
             var self = this;
 
@@ -249,42 +241,33 @@
     AsChoice.defaults = {
         skin: null,
 
-        // status: {
-        //     a: {
-        //         text: 'on',
-        //         icon: 'icon-1'
-        //     },
-        //     b: {
-        //         text: 'off',
-        //         icon: 'icon-2'
-        //     },
-        //     c: {
-        //         text: 'default',
-        //         icon: 'icon-3'
-        //     }
-        // },
-
         multiple: false,
         value: ['default'],
         name: null,
 
         namespace: 'asChoice'
-        // onChange: function(instance) {
-
-        // }
     };
 
     $.fn.asChoice = function(options) {
         if (typeof options === 'string') {
             var method = options;
-            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : undefined;
+            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : [];
 
-            return this.each(function() {
-                var api = $.data(this, 'asChoice');
-                if (typeof api[method] === 'function') {
-                    api[method].apply(api, method_arguments);
+            if (/^\_/.test(method)) {
+                return false;
+            } else if (/^(val)$/.test(method)) {
+                var api = this.first().data('asChoice');
+                if (api && typeof api[method] === 'function') {
+                    return api[method].apply(api, method_arguments);
                 }
-            });
+            } else {
+                return this.each(function() {
+                    var api = $.data(this, 'asChoice');
+                    if (api && typeof api[method] === 'function') {
+                        api[method].apply(api, method_arguments);
+                    }
+                });
+            }
         } else {
             return this.each(function() {
                 if (!$.data(this, 'asChoice')) {
