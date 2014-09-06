@@ -1,4 +1,4 @@
-/*! jquery asChoice - v0.2.0 - 2014-09-05
+/*! jquery asChoice - v0.2.1 - 2014-09-06
 * https://github.com/amazingSurge/jquery-asChoice
 * Copyright (c) 2014 amazingSurge; Licensed GPL */
 (function($) {
@@ -112,16 +112,18 @@
             this._trigger('ready');
         },
         _trigger: function(eventType) {
+            var method_arguments = Array.prototype.slice.call(arguments, 1),
+                data = method_arguments.concat([this]);
+
             // event
-            this.$select.trigger('asChoice::' + eventType, this);
-            this.$select.trigger(eventType + '.asChoice', this);
+            this.$select.trigger('asChoice::' + eventType, data);
+            this.$select.trigger(eventType + '.asChoice', data);
 
             // callback
             eventType = eventType.replace(/\b\w+\b/g, function(word) {
                 return word.substring(0, 1).toUpperCase() + word.substring(1);
             });
             var onFunction = 'on' + eventType;
-            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : undefined;
             if (typeof this.options[onFunction] === 'function') {
                 this.options[onFunction].apply(this, method_arguments);
             }
@@ -188,10 +190,6 @@
                 this._trigger('change');
             }
         },
-
-        /*
-            Public Method
-         */
         val: function(value, status) {
             var self = this;
 
@@ -247,11 +245,11 @@
     $.fn.asChoice = function(options) {
         if (typeof options === 'string') {
             var method = options;
-            var method_arguments = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : [];
+            var method_arguments = Array.prototype.slice.call(arguments, 1);
 
             if (/^\_/.test(method)) {
                 return false;
-            } else if (/^(val)$/.test(method)) {
+            } else if (method === 'get' || (method === 'val' && method_arguments.length === 0)) {
                 var api = this.first().data('asChoice');
                 if (api && typeof api[method] === 'function') {
                     return api[method].apply(api, method_arguments);
