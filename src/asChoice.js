@@ -1,21 +1,7 @@
-/**
-* jquery asChoice v0.3.0
-* https://github.com/amazingSurge/jquery-asChoice
-*
-* Copyright (c) amazingSurge
-* Released under the LGPL-3.0 license
-*/
 import $ from 'jquery';
+import DEFAULTS from './defaults';
 
-var DEFAULTS = {
-  namespace: 'asChoice',
-  skin: null,
-
-  multiple: false,
-  value: ['default']
-};
-
-const NAMESPACE$1 = 'asChoice';
+const NAMESPACE = 'asChoice';
 
 /**
  * Plugin constructor
@@ -254,7 +240,7 @@ class asChoice {
     let data = [this].concat(...params);
 
     // event
-    this.$select.trigger(`${NAMESPACE$1}::${eventType}`, data);
+    this.$select.trigger(`${NAMESPACE}::${eventType}`, data);
 
     // callback
     eventType = eventType.replace(/\b\w+\b/g, (word) => {
@@ -272,47 +258,4 @@ class asChoice {
   }
 }
 
-var info = {
-  version:'0.3.0'
-};
-
-const NAMESPACE = 'asChoice';
-const OtherAsChoice = $.fn.asChoice;
-
-const jQueryAsChoice = function(options, ...args) {
-  if (typeof options === 'string') {
-    const method = options;
-
-    if (/^_/.test(method)) {
-      return false;
-    } else if ((/^(get)/.test(method))) {
-      const instance = this.first().data(NAMESPACE);
-      if (instance && typeof instance[method] === 'function') {
-        return instance[method](...args);
-      }
-    } else {
-      return this.each(function() {
-        const instance = $.data(this, NAMESPACE);
-        if (instance && typeof instance[method] === 'function') {
-          instance[method](...args);
-        }
-      });
-    }
-  }
-
-  return this.each(function() {
-    if (!$(this).data(NAMESPACE)) {
-      $(this).data(NAMESPACE, new asChoice(this, options));
-    }
-  });
-};
-
-$.fn.asChoice = jQueryAsChoice;
-
-$.asChoice = $.extend({
-  setDefaults: asChoice.setDefaults,
-  noConflict: function() {
-    $.fn.asChoice = OtherAsChoice;
-    return jQueryAsChoice;
-  }
-}, info);
+export default asChoice;

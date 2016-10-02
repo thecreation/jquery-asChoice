@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AsaChoice</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../dist/css/asChoice.css">
+
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.toc.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="../dist/jquery-asChoice.js"></script>
+</head>
+<style type="text/css">
+  #wrap {
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #000;
+  }
+
+  .switch-input {
+    display: none;
+  }
+
+  .select-box {
+    margin-top: 20px;
+  }
+
+  .test-wrap {
+    margin-top: 20px;
+  }
+
+  .test-1 {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background-color: #555;
+  }
+
+  .test-2 {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background-color: #888;
+  }
+</style>
+
+<body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div id="toc"></div>
+  <div id="wrapper">
+    <section>
+      <h2>Choice</h2>
+      <section>
+        <h3>Built on select tag with multiple selected</h3>
+        <pre class="has-example"><code class="language-javascript">
+&lt;select class="select" multiple="multiple"&gt;
+    &lt;option value ="default" selected="selected"&gt;default&lt;/option&gt;
+    &lt;option value ="on"&gt;on&lt;/option&gt;
+    &lt;option value="off"&gt;off&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+    $('.select').asChoice();
+&lt;/script&gt;
+            </code></pre>
+        <div class="example">
+          <select class="select" multiple="multiple">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on">on</option>
+                    <option value="off">off</option>
+                </select>
+          <script type="text/javascript">
+            $('.select').asChoice();
+          </script>
+        </div>
+      </section>
+      <section>
+        <h3>Built on select tag with single selected</h3>
+        <pre class="has-example"><code class="language-javascript">
+&lt;select class="select-radio"&gt;
+    &lt;option value ="default" selected="selected"&gt;default&lt;/option&gt;
+    &lt;option value ="on" selected="selected"&gt;on&lt;/option&gt;
+    &lt;option value="off"&gt;off&lt;/option&gt;
+&lt;/select&gt;
+&lt;script type="text/javascript"&gt;
+    $('.select-radio').asChoice();
+&lt;/script&gt;
+            </code></pre>
+        <div class="example">
+          <select class="select-radio">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+          <script type="text/javascript">
+            $('.select-radio').asChoice();
+          </script>
+        </div>
+      </section>
+      <section>
+        <h3>Built on div tag </h3>
+        <pre class="has-example"><code class="language-javascript">
+&lt;div class="blank"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+    $('.blank').asChoice({
+        status: {
+            a: {
+                text: 'on',
+            },
+            b: {
+                text: 'off',
+            },
+            c: {
+                text: 'default',
+            }
+        },
+        multiple: false
+    });
+&lt;/script&gt;
+            </code></pre>
+        <div class="example">
+          <div class="blank"></div>
+          <script type="text/javascript">
+            $('.blank').asChoice({
+              status: {
+                a: {
+                  text: 'on',
+                },
+                b: {
+                  text: 'off',
+                },
+                c: {
+                  text: 'default',
+                }
+              },
+              multiple: false
+            });
+          </script>
+        </div>
+      </section>
+      <section>
+        <h3>Event</h3>
+        <div class="example">
+          <select class="select-event" multiple="multiple">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+          <div class="consoleEvent" style="height:200px; overflow:hidden; border: 1px solid #888"></div>
+          <script>
+            $(document).ready(function() {
+              $('.select-event').on('asChoice::ready', function(event, instance) {
+                var text = event.type + ': triggered';
+                $('<div>' + text + '</div>').prependTo('.consoleEvent');
+              });
+              $('.select-event').asChoice({
+                status: {
+                  a: {
+                    text: 'on'
+                  },
+                  b: {
+                    text: 'off'
+                  },
+                  c: {
+                    text: 'default'
+                  }
+                },
+                multiple: true
+              });
+              $('.select-event').on('asChoice::change', function(event, instance) {
+                var text = event.type + ': triggered;   selected value: ' + instance.val().join(',');
+                $('<div>' + text + '</div>').prependTo('.consoleEvent');
+              });
+            });
+          </script>
+        </div>
+      </section>
+      <section>
+        <h3>Method</h3>
+        <div class="example">
+          <select class="select-method" multiple="multiple">
+                    <option value ="default" selected="selected">default</option>
+                    <option value ="on" selected="selected">on</option>
+                    <option value="off">off</option>
+                </select>
+          <div class="consoleEvent" style="height:200px; overflow:hidden; border: 1px solid #888"></div>
+          <script>
+            $(document).ready(function() {
+              $('.select-method').on('asChoice::ready', function(event, instance) {
+                var text = event.type + ': triggered';
+                $('<div>' + text + '</div>').prependTo('.consoleEvent');
+              });
+              $('.select-method').asChoice({
+                status: {
+                  a: {
+                    text: 'on'
+                  },
+                  b: {
+                    text: 'off'
+                  },
+                  c: {
+                    text: 'default'
+                  }
+                },
+                multiple: true
+              });
+              $('.select-event').on('asChoice::change', function(event, instance) {
+                var text = event.type + ': triggered;   selected value: ' + instance.val().join(',');
+                $('<div>' + text + '</div>').prependTo('.consoleEvent');
+              });
+            });
+          </script>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script type="text/javascript">
+    (function() {
+      $('#toc').toc();
+    })();
+  </script>
+
+</body>
+</html>
