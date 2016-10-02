@@ -1,0 +1,86 @@
+/**
+* jquery asChoice v0.2.2
+* https://github.com/amazingSurge/jquery-asChoice
+*
+* Copyright (c) amazingSurge
+* Released under the LGPL-3.0 license
+*/
+.asChoice {
+  display: inline-block;
+  list-style: none;
+
+  *zoom: 1;
+}
+.asChoice:before, .asChoice:after {
+  display: table; 
+  content: "";
+}
+.asChoice:after {
+  clear: both;
+}
+.asChoice > li {
+  float: left;
+  line-height: 1;
+}
+.asChoice > li:hover {
+  cursor: pointer;
+}
+.asChoice > li > span {
+  line-height: 1;
+  text-decoration: none;
+}
+.asChoice > li > span:hover {
+  text-decoration: none;
+}
+.asChoice > li > span:active {
+  text-decoration: none;
+}
+.asChoice > li > span:focus {
+  outline: none;
+}
+
+.asChoice {
+  list-style: none;
+}
+.asChoice > li {
+  float: left;
+  background-color: #7ebdcb;
+}
+.asChoice > li:hover {
+  cursor: pointer;
+}
+.asChoice > li > span {
+  display: block;
+  padding: 8px 15px 6px;
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+  background-color: transparent; 
+  border-right: 1px solid #a2d0da;
+}
+.asChoice > li > span:hover {
+  text-decoration: none;
+}
+.asChoice > li > span:active {
+  text-decoration: none;
+}
+.asChoice > li > span:focus {
+  outline: none;
+}
+.asChoice > li:first-child {
+  border-radius: 2px 0 0 2px;
+}
+.asChoice > li:first-child > span {
+  border-left: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+}
+.asChoice > li:last-child {
+  border-radius: 0 2px 2px 0;
+}
+.asChoice > li:last-child > span {
+  border-right: 1px solid transparent;
+  border-radius: 0 2px 2px 0;
+}
+.asChoice > li.asChoice-selected {
+  background-color: #6ba1ad;
+}
