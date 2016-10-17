@@ -1,5 +1,5 @@
 /**
-* jquery asChoice v0.3.0
+* jquery asChoice v0.3.1
 * https://github.com/amazingSurge/jquery-asChoice
 *
 * Copyright (c) amazingSurge
@@ -273,7 +273,7 @@ class asChoice {
 }
 
 var info = {
-  version:'0.3.0'
+  version:'0.3.1'
 };
 
 const NAMESPACE = 'asChoice';
@@ -285,7 +285,7 @@ const jQueryAsChoice = function(options, ...args) {
 
     if (/^_/.test(method)) {
       return false;
-    } else if ((/^(get)/.test(method))) {
+    } else if ((/^(get)$/.test(method)) || (method === 'val' && args.length === 0)) {
       const instance = this.first().data(NAMESPACE);
       if (instance && typeof instance[method] === 'function') {
         return instance[method](...args);

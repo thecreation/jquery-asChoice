@@ -46,6 +46,11 @@ bower install jquery-asChoice --save
 npm install jquery-asChoice --save
 ```
 
+#### Install From Yarn
+```sh
+yarn add jquery-asChoice
+```
+
 #### Build From Source
 If you want build from source:
 
@@ -113,11 +118,11 @@ You can also save the instances to variable for further use.
 
 ```javascript
 // call directly
-$().asChoice('destory');
+$().asChoice('destroy');
 
 // or
 var api = $().data('asChoice');
-api.destory();
+api.destroy();
 ```
 
 #### val(value)
