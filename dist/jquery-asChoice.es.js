@@ -1,5 +1,5 @@
 /**
-* jquery asChoice v0.3.1
+* jquery asChoice v0.3.2
 * https://github.com/amazingSurge/jquery-asChoice
 *
 * Copyright (c) amazingSurge
@@ -273,7 +273,7 @@ class asChoice {
 }
 
 var info = {
-  version:'0.3.1'
+  version:'0.3.2'
 };
 
 const NAMESPACE = 'asChoice';

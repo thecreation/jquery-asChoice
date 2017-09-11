@@ -1,6 +1,6 @@
 {
   "name": "jquery-asChoice",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A jquery plugin that convent select into choices.",
   "main": "dist/jquery-asChoice.js",
   "copyright": "amazingSurge",
